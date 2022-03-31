@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Hello from './Hello';
-import './style.css';
+
+import MouseWithRenderProp from './app/MouseWithRenderProp';
+import MouseWithChildrenAsRenderProp from './app/MouseWithChildrenAsRenderProp';
+import Cat from './app/Cat';
+
+import withMouseHOC from './app/withMouseHOC';
 
 interface AppProps {}
 interface AppState {
@@ -16,7 +20,12 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <div>
-        <p>Hi</p>
+        <MouseWithRenderProp render={(mouse) => <Cat mouse={mouse} />} />
+        <MouseWithChildrenAsRenderProp>
+          {(mouse) => <Cat mouse={mouse} />}
+        </MouseWithChildrenAsRenderProp>
+
+        {withMouseHOC(Cat)}
       </div>
     );
   }
